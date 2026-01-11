@@ -9,10 +9,16 @@ const PORT = process.env.PORT || 8080;
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-// config routes
-routeWeb(app);
+//config req.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // config static files: image, css, javascript
 app.use(express.static('public'));
+
+// config routes
+routeWeb(app);
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

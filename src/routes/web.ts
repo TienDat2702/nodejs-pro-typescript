@@ -1,17 +1,13 @@
 import express, { Express } from 'express';
+import { getHomePage } from '../controllers/home.controller';
+import { getCreateUser, postCreateUser } from '../controllers/user.controller';
 
 const route = express.Router();
 
 const routeWeb = (app: Express) => {
-    route.get('/', (req, res) => {
-        return res.render('home');
-    });
-    route.get('/demo', (req, res) => {
-        return res.send('Hello World from Express demo!');
-    });
-    route.get('/demo2', (req, res) => {
-        return res.send('Hello World from Express demo2!');
-    });
+    route.get('/', getHomePage);
+    route.get('/create-user', getCreateUser);
+    route.post('/handle-create-user', postCreateUser);
 
     app.use('/', route);
 }
