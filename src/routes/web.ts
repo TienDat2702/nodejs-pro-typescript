@@ -1,6 +1,5 @@
-import express, { Express } from 'express';
-import { getHomePage } from '../controllers/home.controller';
-import { getCreateUser, postCreateUser } from '../controllers/user.controller';
+import express, { Express } from 'express'; 
+import { getCreateUser, postCreateUser, getHomePage } from '../controllers/user.controller';
 
 const route = express.Router();
 

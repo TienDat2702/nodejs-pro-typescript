@@ -36,7 +36,7 @@
   "homepage": "https://github.com/TienDat2702/nodejs-pro-typescript#readme",
   "dependencies": {
     "dotenv": "16.4.7",
-    "ejs": "3.1.10",
+    "ejs": "^3.1.10",
     "express": "5.0.1",
     "mysql2": "3.12.0"
   },
