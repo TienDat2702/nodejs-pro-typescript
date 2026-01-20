@@ -1,5 +1,18 @@
 import getConnection from "config/database";
 
+const getAllUser = async () => {
+    const connection = await getConnection();
+    try {
+        const [results, fields] = await connection.query(
+            'SELECT * FROM `users`'
+        );
+        return results
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
 const handleCreateUser = async (name: string, email: string, address: string) => {
     const connection = await getConnection();
     try {
@@ -14,13 +27,41 @@ const handleCreateUser = async (name: string, email: string, address: string) =>
     }
 };
 
-const getAllUser = async () => {
+const handleDeleteUser = async (id: string) => {
     const connection = await getConnection();
     try {
-        const [results, fields] = await connection.query(
-            'SELECT * FROM `users`'
-        );
-        return results
+        const sql = 'DELETE FROM `users` WHERE `id` = ? LIMIT 1';
+        const values = [id];
+
+        const [result, fields] = await connection.execute(sql, values);
+        return result
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+const updateUserById = async (id: string, name: string, email: string, address: string) => {
+    const connection = await getConnection();
+    try {
+        const sql = 'UPDATE `users` SET `name` = ?, `email` = ?, `address` = ? WHERE `id` = ? LIMIT 1';
+        const values = [name, email, address, id];
+
+        const [result, fields] = await connection.execute(sql, values);
+        return result
+    } catch (err) {
+        console.log(err);
+        return [];
+    }
+}
+
+const getUserById = async (id: string) => {
+    const connection = await getConnection();
+    try {
+        const sql = 'SELECT * FROM `users` WHERE `id` = ? LIMIT 1';
+        const values = [id];
+
+        const [result, fields] = await connection.execute(sql, values);
+        return result[0]
     } catch (err) {
         console.log(err);
         return [];
@@ -30,5 +71,8 @@ const getAllUser = async () => {
 
 export {
     handleCreateUser,
+    handleDeleteUser,
+    getUserById,
+    updateUserById,
     getAllUser,
 }
