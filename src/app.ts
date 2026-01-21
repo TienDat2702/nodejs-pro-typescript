@@ -2,6 +2,7 @@ import express from 'express';
 import 'dotenv/config';
 import routeWeb from './routes/web';
 import getConnection from './config/database';
+import initSeedingData from 'config/seed';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -22,6 +23,9 @@ routeWeb(app);
 
 // connection Database
 getConnection();
+
+// create seeding data
+initSeedingData();
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
