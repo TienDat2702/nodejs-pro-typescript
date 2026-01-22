@@ -19,7 +19,7 @@ const initSeedingData = async () => {
 
         })
     } else {
-        console.log(">>>>> DATABASE EMPTY");
+        console.log(">>>>> DATABASE NOT EMPTY");
 
     }
 }
