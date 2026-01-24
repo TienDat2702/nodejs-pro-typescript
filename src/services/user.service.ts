@@ -1,19 +1,32 @@
 import { prisma } from "config/clinent";
+import { ACCOUNT_TYPE } from "config/constant";
 import getConnection from "config/database";
 
 const getAllUser = async () => {
     const users = await prisma.user.findMany();
     return users;
 }
+const getAllRole = async () => {
+    const roles = await prisma.role.findMany();
+    return roles;
+}
 
-const handleCreateUser = async (name: string, email: string, address: string) => {
+const handleCreateUser = async (
+    name: string,
+    username: string,
+    address: string,
+    phone: string,
+    avatar: string,
+) => {
     const newUser = await prisma.user.create({
         data: {
             fullName: name,
-            username: email,
+            username: username,
             address: address,
             password: '',
-            accountType: '',
+            accountType: ACCOUNT_TYPE.SYSTEM,
+            phone: phone,
+            avatar: avatar,
         }
     })
     return newUser;
@@ -58,4 +71,5 @@ export {
     getUserById,
     updateUserById,
     getAllUser,
+    getAllRole
 }
